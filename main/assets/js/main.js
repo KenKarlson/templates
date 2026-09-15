@@ -8,7 +8,9 @@
  * 4. Эффект шапки при скролле
  * 5. Выпадающее подменю на тач-устройствах
  * 6. Ленивая загрузка изображений
- * 7. Утилиты
+ * 7. Переключение темы (светлая/темная)
+ * 8. Переключение размера шрифта (А А А)
+ * 9. Утилиты
  * 
  * @package    main
  * @see        assets/js/ — папка для дополнительных скриптов
@@ -28,6 +30,8 @@
 		initHeaderScroll();
 		initTouchSubmenu();
 		initLazyImages();
+		initThemeToggle();
+		initFontSize();
 	});
 
 	// ========================================
@@ -242,7 +246,113 @@
 	}
 
 	// ========================================
-	// 7. УТИЛИТЫ (экспорт для использования в других скриптах)
+	// 7. ПЕРЕКЛЮЧЕНИЕ ТЕМЫ (СВЕТЛАЯ/ТЕМНАЯ)
+	// ========================================
+
+	function initThemeToggle() {
+		const btn = document.querySelector('[data-theme-toggle]');
+		if (!btn) return;
+
+		const root = document.documentElement;
+		const KEY = 'main-theme';
+
+		function getSaved() {
+			try {
+				const value = localStorage.getItem(KEY);
+				return (value === 'dark' || value === 'light') ? value : null;
+			} catch (e) {
+				return null;
+			}
+		}
+
+		function getCurrent() {
+			const saved = getSaved();
+			if (saved) return saved;
+			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+		}
+
+		function updateButton() {
+			const isDark = getCurrent() === 'dark';
+			btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+			btn.setAttribute('aria-label', isDark ? 'Включить светлую тему' : 'Включить темную тему');
+		}
+
+		function apply(theme) {
+			root.classList.remove('dark', 'light');
+			root.classList.add(theme);
+			try {
+				localStorage.setItem(KEY, theme);
+			} catch (e) {
+				// localStorage недоступен — работаем без сохранения
+			}
+			updateButton();
+		}
+
+		// Стартовое состояние
+		root.classList.remove('dark', 'light');
+		root.classList.add(getCurrent());
+		updateButton();
+
+		btn.addEventListener('click', function() {
+			apply(getCurrent() === 'dark' ? 'light' : 'dark');
+		});
+
+		// Реакция на смену системной темы, если пользователь не выбирал вручную
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+			if (!getSaved()) updateButton();
+		});
+	}
+
+	// ========================================
+	// 8. ПЕРЕКЛЮЧЕНИЕ РАЗМЕРА ШРИФТА (А А А)
+	// ========================================
+
+	function initFontSize() {
+		const buttons = document.querySelectorAll('[data-font-size]');
+		if (!buttons.length) return;
+
+		const root = document.documentElement;
+		const KEY = 'main-font-size';
+		const SIZES = ['small', 'normal', 'large'];
+
+		function apply(size) {
+			SIZES.forEach(function(name) {
+				root.classList.remove('font-size-' + name);
+			});
+			root.classList.add('font-size-' + size);
+
+			try {
+				localStorage.setItem(KEY, size);
+			} catch (e) {
+				// localStorage недоступен — работаем без сохранения
+			}
+
+			buttons.forEach(function(btn) {
+				const active = btn.dataset.fontSize === size;
+				btn.classList.toggle('is-active', active);
+				btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+			});
+		}
+
+		buttons.forEach(function(btn) {
+			btn.addEventListener('click', function() {
+				apply(btn.dataset.fontSize);
+			});
+		});
+
+		// Стартовое состояние
+		let saved = 'normal';
+		try {
+			const value = localStorage.getItem(KEY);
+			if (SIZES.indexOf(value) !== -1) saved = value;
+		} catch (e) {
+			// localStorage недоступен — используем базовый размер
+		}
+		apply(saved);
+	}
+
+	// ========================================
+	// 9. УТИЛИТЫ (экспорт для использования в других скриптах)
 	// ========================================
 
 	window.MainTemplate = {

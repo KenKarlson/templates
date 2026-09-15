@@ -71,6 +71,10 @@ $OG_IMAGE       = $APPLICATION->GetProperty("og_image");
 ?><!DOCTYPE html>
 <html lang="<?= LANGUAGE_ID ?>">
 <head>
+	<script>
+		/* Применяем сохраненную тему и размер шрифта до отрисовки (без мигания) */
+		(function(){try{var d=document.documentElement,t=localStorage.getItem('main-theme'),f=localStorage.getItem('main-font-size');if(t==='dark'||t==='light'){d.classList.add(t);}else{d.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}d.classList.add('font-size-'+(f==='small'||f==='large'?f:'normal'));}catch(e){}})();
+	</script>
 	<meta charset="<?= LANG_CHARSET ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -112,31 +116,58 @@ $OG_IMAGE       = $APPLICATION->GetProperty("og_image");
 					<img src="<?= $IMG_PATH ?>/logo.svg" alt="<?= htmlspecialcharsbx($SITE_NAME) ?>" width="150" height="40">
 				</a>
 
-				<!-- Главное меню -->
-				<nav class="header__nav" aria-label="Главное меню">
-					<?$APPLICATION->IncludeComponent(
-						"bitrix:menu",
-						"main",
-						array(
-							"ROOT_MENU_TYPE" => "top",
-							"MENU_CACHE_TYPE" => "A",
-							"MENU_CACHE_TIME" => "3600",
-							"MENU_CACHE_USE_GROUPS" => "Y",
-							"MENU_CACHE_GET_VARS" => array(),
-							"MAX_LEVEL" => "2",
-							"CHILD_MENU_TYPE" => "left",
-							"USE_EXT" => "Y",
-							"DELAY" => "N",
-							"ALLOW_MULTI_SELECT" => "N",
-						),
-						false
-					);?>
-				</nav>
+				<div class="header__right">
 
-				<!-- Кнопка мобильного меню -->
-				<button class="header__mobile-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
-					<span class="header__mobile-toggle-icon"></span>
-				</button>
+					<!-- Главное меню -->
+					<nav class="header__nav" aria-label="Главное меню">
+						<?$APPLICATION->IncludeComponent(
+							"bitrix:menu",
+							"main",
+							array(
+								"ROOT_MENU_TYPE" => "top",
+								"MENU_CACHE_TYPE" => "A",
+								"MENU_CACHE_TIME" => "3600",
+								"MENU_CACHE_USE_GROUPS" => "Y",
+								"MENU_CACHE_GET_VARS" => array(),
+								"MAX_LEVEL" => "2",
+								"CHILD_MENU_TYPE" => "left",
+								"USE_EXT" => "Y",
+								"DELAY" => "N",
+								"ALLOW_MULTI_SELECT" => "N",
+							),
+							false
+						);?>
+					</nav>
+
+					<!-- Инструменты: размер шрифта и переключение темы -->
+					<div class="header__tools">
+
+						<!-- Размер шрифта: А А А -->
+						<div class="font-size" role="group" aria-label="Размер шрифта">
+							<button type="button" class="font-size__btn" data-font-size="small" aria-label="Маленький шрифт" aria-pressed="false">А</button>
+							<button type="button" class="font-size__btn is-active" data-font-size="normal" aria-label="Обычный шрифт" aria-pressed="true">А</button>
+							<button type="button" class="font-size__btn" data-font-size="large" aria-label="Большой шрифт" aria-pressed="false">А</button>
+						</div>
+
+						<!-- Переключение светлой/темной темы -->
+						<button type="button" class="theme-toggle" data-theme-toggle aria-label="Переключить тему" aria-pressed="false">
+							<svg class="theme-toggle__icon theme-toggle__moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+							</svg>
+							<svg class="theme-toggle__icon theme-toggle__sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<circle cx="12" cy="12" r="4"/>
+								<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+							</svg>
+						</button>
+
+					</div>
+
+					<!-- Кнопка мобильного меню -->
+					<button class="header__mobile-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+						<span class="header__mobile-toggle-icon"></span>
+					</button>
+
+				</div>
 
 			</div>
 		</div>
