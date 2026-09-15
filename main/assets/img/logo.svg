@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 40" fill="none">
+	<!-- Логотип-заглушка. Замените на свой логотип -->
+	<rect width="150" height="40" rx="4" fill="#2563eb"/>
+	<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="600">LOGO</text>
+</svg>
