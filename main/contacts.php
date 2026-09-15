@@ -1,9 +1,11 @@
 <?
 /**
- * contacts.php — Страница контактов
- * 
- * Содержит: контактную информацию, карту, форму обратной связи.
- * 
+ * contacts.php — Страница контактов (референс)
+ *
+ * ВНИМАНИЕ: физические страницы в 1С-Битрикс лежат в корне сайта,
+ * а не в папке шаблона. Этот файл — образец для копирования в корень
+ * (например /contacts/index.php). В папке шаблона Битриксом не используется.
+ *
  * @package    main
  * @see        page.php — внутренняя страница
  */
@@ -14,14 +16,15 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 
 $APPLICATION->SetTitle("Контакты");
 
-?><h1><?$APPLICATION->ShowTitle(false)?></h1>
-
-<!-- ========================================
-     CONTACTS AREA — Область контактов
-     ======================================== -->
+?>
 <div class="container">
+	<h1><?$APPLICATION->ShowTitle(false)?></h1>
+
+	<!-- ========================================
+	     CONTACTS AREA — Область контактов
+	     ======================================== -->
 	<div class="contacts">
-		
+
 		<!-- Контактная информация -->
 		<div class="contacts__info">
 			<?$APPLICATION->IncludeFile(
@@ -30,7 +33,7 @@ $APPLICATION->SetTitle("Контакты");
 				array("MODE" => "html")
 			);?>
 		</div>
-		
+
 		<!-- Форма обратной связи -->
 		<div class="contacts__form">
 			<?$APPLICATION->IncludeComponent(
@@ -45,16 +48,6 @@ $APPLICATION->SetTitle("Контакты");
 				false
 			);?>
 		</div>
-		
+
 	</div>
-	
-	<!-- Карта (раскомментируйте при необходимости) -->
-	<!-- <div class="contacts__map">
-		<?$APPLICATION->IncludeFile(
-			SITE_DIR . "include/contacts_map.php",
-			array(),
-			array("MODE" => "html")
-		);?>
-	</div> -->
-	
 </div>

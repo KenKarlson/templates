@@ -1,10 +1,11 @@
 <?
 /**
- * catalog.php — Страница каталога/списка
- * 
- * Используется для вывода каталога товаров, списка услуг,
- * портфолио и других списочных разделов.
- * 
+ * catalog.php — Страница каталога/списка (референс)
+ *
+ * ВНИМАНИЕ: физические страницы в 1С-Битрикс лежат в корне сайта,
+ * а не в папке шаблона. Этот файл — образец для копирования в корень
+ * раздела (например /catalog/index.php). В папке шаблона Битриксом не используется.
+ *
  * @package    main
  * @see        page.php — внутренняя страница
  */
@@ -13,15 +14,16 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 	die("Direct access not allowed");
 }
 
-?><h1><?$APPLICATION->ShowTitle(false)?></h1>
-
-<!-- ========================================
-     CATALOG AREA — Область каталога
-     Здесь подключается компонент bitrix:catalog
-     ======================================== -->
+?>
 <div class="container">
+	<h1><?$APPLICATION->ShowTitle(false)?></h1>
+
+	<!-- ========================================
+	     CATALOG AREA — Область каталога
+	     Здесь подключается компонент bitrix:catalog.section
+	     ======================================== -->
 	<div class="catalog">
-		
+
 		<!-- Фильтр (раскомментируйте при необходимости) -->
 		<!-- <?$APPLICATION->IncludeComponent(
 			"bitrix:catalog.filter",
@@ -38,7 +40,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 			),
 			false
 		);?> -->
-		
+
 		<!-- Список элементов -->
 		<div class="catalog__list">
 			<?$APPLICATION->IncludeComponent(
@@ -56,16 +58,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 					"PROPERTY_CODE" => array(),
 					"INCLUDE_SUBSECTIONS" => "Y",
 					"SHOW_ALL_WO_SECTION" => "Y",
-					"HIDE_NOT_AVAILABLE" => "N",
 					"PRICE_CODE" => array(),
 					"USE_PRICE_COUNT" => "N",
-					"SHOW_PRICE_COUNT" => "1",
-					"PRICE_VAT_INCLUDE" => "Y",
 					"CONVERT_CURRENCY" => "N",
 					"BASKET_URL" => "",
 					"ACTION_VARIABLE" => "action",
-					"PRODUCT_PROPS_VARIABLE" => "product_props",
-					"PRODUCT_QUANTITY_VARIABLE" => "quantity",
 					"CACHE_TYPE" => "A",
 					"CACHE_TIME" => "3600",
 					"CACHE_FILTER" => "N",
@@ -74,6 +71,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 				false
 			);?>
 		</div>
-		
+
 	</div>
 </div>

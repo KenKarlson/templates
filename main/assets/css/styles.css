@@ -134,7 +134,6 @@
 html {
 	font-size: var(--font-size-base);
 	-webkit-text-size-adjust: 100%;
-	scroll-behavior: smooth;
 }
 
 body {
@@ -179,12 +178,6 @@ a {
 
 a:hover {
 	color: var(--color-primary-hover);
-}
-
-a:focus-visible {
-	outline: 2px solid var(--color-primary);
-	outline-offset: 2px;
-	border-radius: var(--radius-sm);
 }
 
 ul, ol {
@@ -514,12 +507,14 @@ pre code {
 	background: var(--color-bg);
 	z-index: var(--z-fixed);
 	overflow-y: auto;
+	visibility: hidden;
 	transform: translateX(100%);
-	transition: transform var(--transition-slow);
+	transition: transform var(--transition-slow), visibility var(--transition-slow);
 	padding: var(--spacing-lg);
 }
 
 .mobile-menu.is-open {
+	visibility: visible;
 	transform: translateX(0);
 }
 
@@ -1122,6 +1117,51 @@ pre code {
 
 
 /* ========================================
+   16.1 ЭЛЕМЕНТЫ: ССЫЛКА К КОНТЕНТУ, ПОИСК, ЗАБЛОКИРОВАННЫЕ ССЫЛКИ
+   ======================================== */
+
+/* Ссылка "Перейти к содержанию" (видна только при фокусе) */
+.skip-link {
+	position: absolute;
+	top: -100px;
+	left: var(--spacing-md);
+	z-index: var(--z-toast);
+	padding: var(--spacing-sm) var(--spacing-md);
+	background: var(--color-primary);
+	color: #ffffff;
+	border-radius: var(--radius-md);
+	transition: top var(--transition);
+}
+
+.skip-link:focus {
+	top: var(--spacing-md);
+	color: #ffffff;
+}
+
+/* Форма поиска */
+.search-form__row {
+	display: flex;
+	gap: var(--spacing-sm);
+	align-items: stretch;
+}
+
+.search-form__input {
+	flex: 1;
+}
+
+/* Заблокированные ссылки (нет доступа) */
+.is-disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* Ссылки в шапке/подвале в активном состоянии */
+.footer__link.is-active {
+	color: #ffffff;
+}
+
+
+/* ========================================
    17. УТИЛИТЫ
    ======================================== */
 
@@ -1282,14 +1322,10 @@ pre code {
 		grid-column: auto;
 	}
 
-	/* Кнопки */
-	.btn {
+	/* Кнопки форм на мобильном — на всю ширину */
+	.feedback-form .btn,
+	.search-form .btn {
 		width: 100%;
-	}
-
-	.btn--sm,
-	.btn--inline {
-		width: auto;
 	}
 
 	/* Пагинация */
@@ -1339,8 +1375,9 @@ pre code {
    21. ТЕМНАЯ ТЕМА (DARK MODE)
    ======================================== */
 
+/* Автоматически — по настройке системы (если пользователь не выбрал светлую вручную) */
 @media (prefers-color-scheme: dark) {
-	:root {
+	:root:not(.light) {
 		--color-text: #e2e8f0;
 		--color-text-light: #94a3b8;
 		--color-bg: #1e293b;
@@ -1358,23 +1395,63 @@ pre code {
 		--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
 		--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
 	}
+}
 
-	.form-input,
-	.form-select,
-	.form-textarea {
+/* Вручную — добавить класс dark тегу <html> */
+html.dark {
+	--color-text: #e2e8f0;
+	--color-text-light: #94a3b8;
+	--color-bg: #1e293b;
+	--color-bg-light: #0f172a;
+	--color-border: #334155;
+	--color-border-light: #1e293b;
+	--color-primary-light: #1e3a5f;
+	--color-success-bg: #14532d;
+	--color-warning-bg: #78350f;
+	--color-error-bg: #7f1d1d;
+	--color-info-bg: #1e3a5f;
+	--header-bg: #1e293b;
+	--header-border: #334155;
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+	--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+	--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Светлая тема принудительно */
+html.light {
+	--header-bg: #ffffff;
+	--header-border: #e2e8f0;
+}
+
+/* Поля форм и код в темной теме */
+@media (prefers-color-scheme: dark) {
+	:root:not(.light) .form-input,
+	:root:not(.light) .form-select,
+	:root:not(.light) .form-textarea {
 		background: #0f172a;
 		border-color: #334155;
 	}
 
-	.form-input:focus,
-	.form-select:focus,
-	.form-textarea:focus {
+	:root:not(.light) .form-input:focus,
+	:root:not(.light) .form-select:focus,
+	:root:not(.light) .form-textarea:focus {
 		background: #1e293b;
 	}
 
-	code {
+	:root:not(.light) code {
 		background: #0f172a;
 	}
+}
+
+html.dark .form-input,
+html.dark .form-select,
+html.dark .form-textarea {
+	background: #0f172a;
+	border-color: #334155;
+}
+
+html.dark code {
+	background: #0f172a;
 }
 
 

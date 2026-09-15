@@ -44,6 +44,7 @@
 			toggle.setAttribute('aria-expanded', 'true');
 			toggle.classList.add('is-active');
 			menu.classList.add('is-open');
+			menu.setAttribute('aria-hidden', 'false');
 			document.body.style.overflow = 'hidden';
 			document.body.style.touchAction = 'none';
 		}
@@ -52,6 +53,7 @@
 			toggle.setAttribute('aria-expanded', 'false');
 			toggle.classList.remove('is-active');
 			menu.classList.remove('is-open');
+			menu.setAttribute('aria-hidden', 'true');
 			document.body.style.overflow = '';
 			document.body.style.touchAction = '';
 		}
@@ -178,7 +180,7 @@
 			const link = item.querySelector('a');
 			const submenu = item.querySelector('.header__submenu');
 
-			if (!submenu) return;
+			if (!submenu || !link) return;
 
 			link.addEventListener('click', function(e) {
 				// Только для тач-устройств
