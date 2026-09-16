@@ -6,6 +6,9 @@
  * а не в папке шаблона. Этот файл — образец для копирования в корень
  * (например /contacts/index.php). В папке шаблона Битриксом не используется.
  *
+ * Контейнер указан и здесь, и в шаблоне. Двойных отступов не будет —
+ * в CSS есть защита .container .container.
+ *
  * @package    main
  * @see        page.php — внутренняя страница
  */
@@ -15,14 +18,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 }
 
 $APPLICATION->SetTitle("Контакты");
+$APPLICATION->SetPageProperty("description", "Страница контактов, обратная связь.");
 
 ?>
 <div class="container">
 	<h1><?$APPLICATION->ShowTitle(false)?></h1>
 
-	<!-- ========================================
-	     CONTACTS AREA — Область контактов
-	     ======================================== -->
 	<div class="contacts">
 
 		<!-- Контактная информация -->
@@ -40,10 +41,11 @@ $APPLICATION->SetTitle("Контакты");
 				"bitrix:main.feedback",
 				"main",
 				array(
-					"OK_TEXT" => "Спасибо, ваше сообщение отправлено!",
-					"EMAIL_TO" => "info@example.com",
+					"OK_TEXT" => "Ваше сообщение отправлено!",
+					"EMAIL_TO" => COption::GetOptionString("main", "email_from"),
+					"EVENT_MESSAGE_ID" => array("7"),
 					"REQUIRED_FIELDS" => array("NAME", "EMAIL", "MESSAGE"),
-					"EVENT_MESSAGE_ID" => array(),
+					"USE_CAPTCHA" => "Y",
 				),
 				false
 			);?>

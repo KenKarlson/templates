@@ -11,7 +11,6 @@
  * $CSS_PATH      — путь к папке стилей
  * $JS_PATH       — путь к папке скриптов
  * $IMG_PATH      — путь к папке картинок
- * $SITE_NAME     — название сайта
  *
  * @package    main
  * @see        footer.php — подвал сайта
@@ -33,12 +32,6 @@ $ASSETS_PATH   = $TEMPLATE_PATH . '/assets';  // /local/templates/main/assets
 $CSS_PATH      = $ASSETS_PATH . '/css';       // /local/templates/main/assets/css
 $JS_PATH       = $ASSETS_PATH . '/js';        // /local/templates/main/assets/js
 $IMG_PATH      = $ASSETS_PATH . '/img';       // /local/templates/main/assets/img
-
-// ========================================
-// НАЗВАНИЕ САЙТА
-// ========================================
-
-$SITE_NAME = defined("SITE_NAME") ? SITE_NAME : "Мой сайт";
 
 // ========================================
 // ПОДКЛЮЧЕНИЕ CSS И JS
@@ -111,9 +104,13 @@ $OG_IMAGE       = $APPLICATION->GetProperty("og_image");
 		<div class="container">
 			<div class="header__inner">
 
-				<!-- Логотип -->
+				<!-- Логотип (редактируется как включаемая область: include/logo.php) -->
 				<a href="<?= SITE_DIR ?>" class="header__logo" aria-label="На главную">
-					<img src="<?= $IMG_PATH ?>/logo.svg" alt="<?= htmlspecialcharsbx($SITE_NAME) ?>" width="150" height="40">
+					<?$APPLICATION->IncludeFile(
+						SITE_TEMPLATE_PATH . "/include/logo.php",
+						array(),
+						array("MODE" => "html")
+					);?>
 				</a>
 
 				<div class="header__right">
@@ -228,5 +225,9 @@ $OG_IMAGE       = $APPLICATION->GetProperty("og_image");
 
 	<!-- ========================================
 	     WORK_AREA — Рабочая область (контент страницы)
+	     Контейнер уже открыт ниже. Свою разметку не нужно
+	     оборачивать в .container — это сделает шаблон.
+	     Для секции на всю ширину экрана используйте класс .full-width
 	     ======================================== -->
 	<main class="main-content" id="content" role="main">
+		<div class="container">

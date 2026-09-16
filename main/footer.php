@@ -15,6 +15,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 }
 
 ?>
+		</div><!-- /.container -->
 	</main>
 
 	<!-- ========================================
@@ -31,7 +32,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 						array(),
 						array("MODE" => "text")
 					);?></div>
-					<p class="footer__desc">Описание компании или сайта</p>
+					<p class="footer__desc"><?$APPLICATION->IncludeFile(
+						SITE_TEMPLATE_PATH . "/include/footer_description.php",
+						array(),
+						array("MODE" => "text")
+					);?></p>
 				</div>
 
 				<!-- Колонка 2: Навигация -->

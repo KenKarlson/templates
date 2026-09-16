@@ -6,6 +6,9 @@
  * а не в папке шаблона. Этот файл — образец для копирования в корень
  * раздела (например /catalog/index.php). В папке шаблона Битриксом не используется.
  *
+ * Контейнер указан и здесь, и в шаблоне. Двойных отступов не будет —
+ * в CSS есть защита .container .container.
+ *
  * @package    main
  * @see        page.php — внутренняя страница
  */
@@ -24,8 +27,9 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 	     ======================================== -->
 	<div class="catalog">
 
-		<!-- Фильтр (раскомментируйте при необходимости) -->
-		<!-- <?$APPLICATION->IncludeComponent(
+		<!-- Фильтр (чтобы включить — уберите /* и */) -->
+		<?/*
+		$APPLICATION->IncludeComponent(
 			"bitrix:catalog.filter",
 			"main",
 			array(
@@ -39,7 +43,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 				"CACHE_TIME" => "3600",
 			),
 			false
-		);?> -->
+		);
+		*/?>
 
 		<!-- Список элементов -->
 		<div class="catalog__list">
@@ -49,8 +54,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 				array(
 					"IBLOCK_TYPE" => "catalog",
 					"IBLOCK_ID" => "#IBLOCK_ID#",
-					"SECTION_ID" => $_REQUEST["SECTION_ID"],
-					"SECTION_CODE" => $_REQUEST["SECTION_CODE"],
+				"SECTION_ID" => $_REQUEST["SECTION_ID"] ?? "",
+				"SECTION_CODE" => $_REQUEST["SECTION_CODE"] ?? "",
 					"ELEMENT_SORT_FIELD" => "sort",
 					"ELEMENT_SORT_ORDER" => "asc",
 					"PAGE_ELEMENT_COUNT" => "12",

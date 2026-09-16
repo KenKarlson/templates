@@ -157,6 +157,7 @@ body {
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	overflow-x: clip;
 }
 
 .page-wrapper {
@@ -287,6 +288,24 @@ pre code {
 .container--sm { max-width: 768px; }
 .container--lg { max-width: 1400px; }
 .container--full { max-width: 100%; }
+
+/* Защита от двойного контейнера.
+   Шаблон уже открывает .container вокруг контента. Если страница
+   по привычке добавит свой .container — вложенный не даст двойных отступов. */
+.container .container {
+	max-width: none;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+/* Секция на всю ширину экрана — выходит из контейнера */
+.full-width {
+	position: relative;
+	width: 100vw;
+	max-width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+}
 
 /* Grid-сетка */
 .grid {

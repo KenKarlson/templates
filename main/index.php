@@ -6,6 +6,9 @@
  * а не в папке шаблона. Этот файл — образец для копирования в корень
  * (например /index.php). В папке шаблона он Битриксом не используется.
  *
+ * Контейнер указан и здесь, и в шаблоне. Двойных отступов не будет —
+ * в CSS есть защита .container .container.
+ *
  * @package    main
  * @see        page.php — внутренняя страница
  * @see        catalog.php — страница каталога
@@ -23,20 +26,18 @@ $APPLICATION->SetPageProperty("description", "Описание главной с
 ?>
 <div class="container">
 	<h1><?$APPLICATION->ShowTitle(false)?></h1>
-</div>
 
-<!-- ========================================
-     WORK AREA — Рабочая область контента
-     ======================================== -->
-<div class="page-content">
-	<?$APPLICATION->IncludeFile(
-		SITE_DIR . "include/index_hero.php",
-		array(),
-		array("MODE" => "html")
-	);?>
-</div>
+	<!-- ========================================
+	     WORK AREA — Рабочая область контента
+	     ======================================== -->
+	<div class="page-content">
+		<?$APPLICATION->IncludeFile(
+			SITE_DIR . "include/index_hero.php",
+			array(),
+			array("MODE" => "html")
+		);?>
+	</div>
 
-<div class="container">
 	<div class="page-content">
 		<?$APPLICATION->IncludeFile(
 			SITE_DIR . "include/index_content.php",
@@ -44,29 +45,33 @@ $APPLICATION->SetPageProperty("description", "Описание главной с
 			array("MODE" => "html")
 		);?>
 	</div>
+
+	<!-- ========================================
+	     ДОПОЛНИТЕЛЬНЫЕ СЕКЦИИ
+	     Чтобы включить — уберите /* и */ вокруг нужного блока
+	     ======================================== -->
+
+	<?/* Секция преимуществ
+	$APPLICATION->IncludeFile(
+		SITE_DIR . "include/index_advantages.php",
+		array(),
+		array("MODE" => "html")
+	);
+	*/?>
+
+	<?/* Секция этапов работы
+	$APPLICATION->IncludeFile(
+		SITE_DIR . "include/index_stages.php",
+		array(),
+		array("MODE" => "html")
+	);
+	*/?>
+
+	<?/* Секция партнеров
+	$APPLICATION->IncludeFile(
+		SITE_DIR . "include/index_partners.php",
+		array(),
+		array("MODE" => "html")
+	);
+	*/?>
 </div>
-
-<!-- ========================================
-     ДОПОЛНИТЕЛЬНЫЕ СЕКЦИИ (раскомментируйте при необходимости)
-     ======================================== -->
-
-<!-- Секция преимуществ -->
-<!-- <?$APPLICATION->IncludeFile(
-	SITE_DIR . "include/index_advantages.php",
-	array(),
-	array("MODE" => "html")
-);?> -->
-
-<!-- Секция этапов работы -->
-<!-- <?$APPLICATION->IncludeFile(
-	SITE_DIR . "include/index_stages.php",
-	array(),
-	array("MODE" => "html")
-);?> -->
-
-<!-- Секция партнеров -->
-<!-- <?$APPLICATION->IncludeFile(
-	SITE_DIR . "include/index_partners.php",
-	array(),
-	array("MODE" => "html")
-);?> -->
