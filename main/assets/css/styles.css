@@ -376,12 +376,6 @@ pre code {
 	width: auto;
 }
 
-.header__logo-text {
-	font-size: var(--font-size-lg);
-	font-weight: 700;
-	color: var(--color-text);
-}
-
 /* Главное меню (десктоп) */
 .header__nav {
 	display: flex;
@@ -587,24 +581,6 @@ pre code {
 html.dark .theme-toggle__moon { display: none; }
 html.dark .theme-toggle__sun { display: block; }
 
-/* Контакты в шапке */
-.header__contacts {
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-lg);
-	flex-shrink: 0;
-}
-
-.header__phone {
-	font-weight: 600;
-	color: var(--color-text);
-	white-space: nowrap;
-}
-
-.header__phone:hover {
-	color: var(--color-primary);
-}
-
 
 /* ========================================
    5. МОБИЛЬНОЕ МЕНЮ
@@ -670,6 +646,15 @@ html.dark .theme-toggle__sun { display: block; }
 .mobile-menu__socials {
 	display: flex;
 	gap: var(--spacing-md);
+}
+
+.mobile-menu__social {
+	color: var(--color-text-light);
+	transition: color var(--transition);
+}
+
+.mobile-menu__social:hover {
+	color: var(--color-primary);
 }
 
 
@@ -1274,6 +1259,33 @@ html.dark .theme-toggle__sun { display: block; }
 
 
 /* ========================================
+   16.2 БЛОКИ: КОНТАКТЫ, КАТАЛОГ
+   ======================================== */
+
+/* Контакты */
+.contacts {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-xl);
+}
+
+.contacts__info {
+	line-height: var(--line-height);
+}
+
+.contacts__form {
+	max-width: 640px;
+}
+
+/* Каталог */
+.catalog {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-lg);
+}
+
+
+/* ========================================
    17. УТИЛИТЫ
    ======================================== */
 
@@ -1353,10 +1365,6 @@ html.dark .theme-toggle__sun { display: block; }
 
 	.footer__col:first-child {
 		grid-column: 1 / -1;
-	}
-
-	.header__contacts {
-		display: none;
 	}
 }
 

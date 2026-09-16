@@ -26,7 +26,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 			<div class="footer__inner">
 
 				<!-- Колонка 1: Информация -->
-				<div class="footer__col footer__col--info">
+				<div class="footer__col">
 					<div class="footer__title"><?$APPLICATION->IncludeFile(
 						SITE_TEMPLATE_PATH . "/include/site_name.php",
 						array(),
@@ -40,7 +40,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 				</div>
 
 				<!-- Колонка 2: Навигация -->
-				<div class="footer__col footer__col--nav">
+				<div class="footer__col">
 					<h3 class="footer__title">Навигация</h3>
 					<?$APPLICATION->IncludeComponent(
 						"bitrix:menu",
@@ -62,7 +62,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 				</div>
 
 				<!-- Колонка 3: Контакты -->
-				<div class="footer__col footer__col--contacts">
+				<div class="footer__col">
 					<h3 class="footer__title">Контакты</h3>
 					<?$APPLICATION->IncludeFile(
 						SITE_TEMPLATE_PATH . "/include/footer_contacts.php",

@@ -23,7 +23,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 
 	<!-- ========================================
 	     CATALOG AREA — Область каталога
-	     Здесь подключается компонент bitrix:catalog.section
 	     ======================================== -->
 	<div class="catalog">
 
@@ -47,35 +46,33 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 		*/?>
 
 		<!-- Список элементов -->
-		<div class="catalog__list">
-			<?$APPLICATION->IncludeComponent(
-				"bitrix:catalog.section",
-				"main",
-				array(
-					"IBLOCK_TYPE" => "catalog",
-					"IBLOCK_ID" => "#IBLOCK_ID#",
+		<?$APPLICATION->IncludeComponent(
+			"bitrix:catalog.section",
+			"main",
+			array(
+				"IBLOCK_TYPE" => "catalog",
+				"IBLOCK_ID" => "#IBLOCK_ID#",
 				"SECTION_ID" => $_REQUEST["SECTION_ID"] ?? "",
 				"SECTION_CODE" => $_REQUEST["SECTION_CODE"] ?? "",
-					"ELEMENT_SORT_FIELD" => "sort",
-					"ELEMENT_SORT_ORDER" => "asc",
-					"PAGE_ELEMENT_COUNT" => "12",
-					"LINE_ELEMENT_COUNT" => "3",
-					"PROPERTY_CODE" => array(),
-					"INCLUDE_SUBSECTIONS" => "Y",
-					"SHOW_ALL_WO_SECTION" => "Y",
-					"PRICE_CODE" => array(),
-					"USE_PRICE_COUNT" => "N",
-					"CONVERT_CURRENCY" => "N",
-					"BASKET_URL" => "",
-					"ACTION_VARIABLE" => "action",
-					"CACHE_TYPE" => "A",
-					"CACHE_TIME" => "3600",
-					"CACHE_FILTER" => "N",
-					"CACHE_GROUPS" => "Y",
-				),
-				false
-			);?>
-		</div>
+				"ELEMENT_SORT_FIELD" => "sort",
+				"ELEMENT_SORT_ORDER" => "asc",
+				"PAGE_ELEMENT_COUNT" => "12",
+				"LINE_ELEMENT_COUNT" => "3",
+				"PROPERTY_CODE" => array(),
+				"INCLUDE_SUBSECTIONS" => "Y",
+				"SHOW_ALL_WO_SECTION" => "Y",
+				"PRICE_CODE" => array(),
+				"USE_PRICE_COUNT" => "N",
+				"CONVERT_CURRENCY" => "N",
+				"BASKET_URL" => "",
+				"ACTION_VARIABLE" => "action",
+				"CACHE_TYPE" => "A",
+				"CACHE_TIME" => "3600",
+				"CACHE_FILTER" => "N",
+				"CACHE_GROUPS" => "Y",
+			),
+			false
+		);?>
 
 	</div>
 </div>
