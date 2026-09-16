@@ -30,7 +30,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 		<?/*
 		$APPLICATION->IncludeComponent(
 			"bitrix:catalog.filter",
-			"main",
+			".default",
 			array(
 				"IBLOCK_TYPE" => "catalog",
 				"IBLOCK_ID" => "#IBLOCK_ID#",

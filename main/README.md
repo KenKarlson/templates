@@ -81,6 +81,7 @@ main/
 │       │   ├── mobile/      #   Мобильное меню
 │       │   └── footer/      #   Меню подвала
 │       ├── breadcrumb/main/ #   Хлебные крошки
+│       ├── catalog.section/main/ # Каталог: список товаров
 │       ├── main.feedback/main/  # Форма обратной связи
 │       └── search.form/main/    # Форма поиска
 │
@@ -374,6 +375,7 @@ Asset::getInstance()->addJs($JS_PATH . '/utils.js');
 | `bitrix:menu` | `mobile` | Мобильное меню |
 | `bitrix:menu` | `footer` | Подвал |
 | `bitrix:breadcrumb` | `main` | Хлебные крошки |
+| `bitrix:catalog.section` | `main` | Каталог: список товаров |
 | `bitrix:main.feedback` | `main` | Форма обратной связи |
 | `bitrix:search.form` | `main` | Поиск |
 
